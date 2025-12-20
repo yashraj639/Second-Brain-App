@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useAtom } from "jotai";
 import { authAtom } from "../hooks/atom";
+import { BACKEND_URL } from "../../config";
 
 interface ShareModalProps {
   open: boolean;
@@ -26,7 +27,7 @@ export function ShareModal({ open, onClose }: ShareModalProps) {
     setLoading(true);
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/brain/share",
+        `${BACKEND_URL}/api/brain/share`,
         { share: true },
         { headers: { Authorization: `Bearer ${token}` } }
       );

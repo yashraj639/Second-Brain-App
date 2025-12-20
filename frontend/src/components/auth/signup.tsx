@@ -3,6 +3,7 @@ import { useSetAtom } from "jotai";
 import { authAtom } from "../hooks/atom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { BACKEND_URL } from "../../config";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -14,7 +15,7 @@ const Signup = () => {
   async function handleSignup() {
     try {
       const res = await axios.post(
-        "http://localhost:3000/api/auth/users/register",
+        `${BACKEND_URL}/api/auth/users/register`,
         {
           name,
           email,

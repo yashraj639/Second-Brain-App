@@ -4,6 +4,7 @@ import axios from "axios";
 import { ContentList } from "./content-list";
 import { ContentSidebar } from "./content-sidebar";
 import type { ContentItem } from "../hooks/use-content";
+import { BACKEND_URL } from "../../config";
 
 export function PublicBrain() {
   const { hash } = useParams();
@@ -16,7 +17,7 @@ export function PublicBrain() {
   useEffect(() => {
     async function fetchPublicBrain() {
       try {
-        const res = await axios.get(`http://localhost:3000/api/brain/${hash}`);
+        const res = await axios.get(`${BACKEND_URL}/api/brain/${hash}`);
         setContents(res.data.content);
         setUsername(res.data.name);
       } catch (err) {

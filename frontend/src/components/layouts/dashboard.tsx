@@ -8,6 +8,7 @@ import { useAtom } from "jotai";
 import { authAtom } from "../hooks/atom";
 import { filterAtom } from "../hooks/use-content";
 import type { ContentItem } from "../hooks/use-content";
+import { BACKEND_URL } from "../../config";
 
 export function Dashboard() {
   const { contents, refresh } = useContent();
@@ -24,7 +25,7 @@ export function Dashboard() {
       : contents.filter((item) => item.type === filter);
 
   async function handleDelete(id: string) {
-    await axios.delete(`http://localhost:3000/api/content/delete/${id}`, {
+    await axios.delete(`${BACKEND_URL}/api/content/delete/${id}`, {
       headers: { Authorization: `Bearer ${token}` },
     });
     refresh();
@@ -33,14 +34,14 @@ export function Dashboard() {
   async function handleSubmit(data: any) {
     if (editItem) {
       await axios.put(
-        `http://localhost:3000/api/content/update/${editItem._id}`,
+        `${BACKEND_URL}/api/content/update/${editItem._id}`,
         data,
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
     } else {
-      await axios.post(`http://localhost:3000/api/content/create`, data, {
+      await axios.post(`${BACKEND_URL}/api/content/create`, data, {
         headers: { Authorization: `Bearer ${token}` },
       });
     }

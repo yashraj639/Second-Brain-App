@@ -3,6 +3,7 @@ import { useSetAtom } from "jotai";
 import { authAtom } from "./atom";
 import { useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
+import { BACKEND_URL } from "../../config";
 
 export default function InitState() {
   const setAuth = useSetAtom(authAtom);
@@ -24,7 +25,7 @@ export default function InitState() {
 
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/auth/users/me",
+          `${BACKEND_URL}/api/auth/users/me`,
           {
             headers: { Authorization: "Bearer " + token },
           }
